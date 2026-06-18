@@ -29,6 +29,7 @@ Il doit aider a garder le projet simple, lisible et coherent dans le temps.
 - Eviter les pages geantes et les fichiers difficiles a modifier a la main.
 - Separer les sections visuelles en widgets nommes clairement.
 - Privilegier la lisibilite avant l'optimisation prematuree.
+- Utiliser les tokens de theme dans `lun4rmood/lib/shared/theme/` au lieu d'ecrire des couleurs, espacements, rayons ou styles en dur dans les pages.
 - Ne pas ajouter de stockage reel tant que la tache ne le demande pas.
 
 ### Verification et fin de tache
@@ -68,6 +69,7 @@ It helps keep the project simple, readable, and consistent over time.
 - Avoid huge pages and files that are hard to edit manually.
 - Split visual sections into clearly named widgets.
 - Prefer readability before premature optimization.
+- Use theme tokens in `lun4rmood/lib/shared/theme/` instead of hardcoding colors, spacing, radius, or text styles in pages.
 - Do not add real storage unless the task asks for it.
 
 ### Verification and task wrap-up

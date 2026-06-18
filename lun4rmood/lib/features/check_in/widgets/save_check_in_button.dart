@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/theme/app_spacing.dart';
+import '../../../shared/theme/app_text_styles.dart';
+
 class SaveCheckInButton extends StatelessWidget {
   const SaveCheckInButton({
     super.key,
@@ -15,19 +18,11 @@ class SaveCheckInButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: const Color(0xFF88AFFF),
-          foregroundColor: const Color(0xFF08111F),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-          ),
+          padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         ),
         child: const Text(
           'Enregistrer',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
+          style: AppTextStyles.button,
         ),
       ),
     );

@@ -13,9 +13,14 @@ A modifier si : l'application doit lancer une autre racine globale.
 A eviter si : on veut seulement modifier une page, un widget ou le style d'un ecran.
 
 `lun4rmood/lib/app/app.dart`
-Utilite reelle : racine MaterialApp de Lun4rMood et point d'assemblage visuel actuel.
-A modifier si : on change le theme global, le titre de l'app ou la page affichee au lancement.
+Utilite reelle : racine MaterialApp de Lun4rMood, connectee au theme global et au shell.
+A modifier si : on change le ThemeData global, le titre de l'app ou la racine affichee.
 A eviter si : on veut seulement modifier le contenu interne d'une feature.
+
+`lun4rmood/lib/app/app_shell.dart`
+Utilite reelle : shell de navigation par onglets entre les ecrans principaux du MVP.
+A modifier si : on change les onglets, leur ordre, leurs icones ou la page affichee par onglet.
+A eviter si : on veut seulement modifier le contenu d'une page.
 
 `lun4rmood/lib/app/router.dart`
 Utilite reelle : emplacement reserve pour une future navigation.
@@ -23,6 +28,11 @@ A modifier si : une navigation explicite est demandee plus tard.
 A eviter si : aucune navigation complete n'est encore demandee.
 
 ### features/
+
+`lun4rmood/lib/features/home/home_page.dart`
+Utilite reelle : page Accueil du shell MVP avec intention produit et resume fictif.
+A modifier si : on change le contenu d'accueil ou les actions visibles.
+A eviter si : on veut changer la barre de navigation.
 
 `lun4rmood/lib/features/check_in/check_in_page.dart`
 Utilite reelle : page principale de saisie quotidienne du Check-in.
@@ -44,24 +54,24 @@ Utilite reelle : bouton visuel d'enregistrement du Check-in.
 A modifier si : on change le libelle ou l'action visible du bouton.
 A eviter si : on veut ajouter du stockage reel sans decision technique explicite.
 
-`lun4rmood/lib/features/journal/`
-Utilite reelle : emplacement reserve pour la future feature journal.
-A modifier si : une tache demande de creer le journal Flutter.
+`lun4rmood/lib/features/journal/journal_page.dart`
+Utilite reelle : page Journal placeholder pour les futures reflexions.
+A modifier si : une tache demande de faire evoluer l'ecran Journal.
 A eviter si : on travaille seulement sur le Check-in.
 
-`lun4rmood/lib/features/statistics/`
-Utilite reelle : emplacement reserve pour les futures statistiques.
-A modifier si : une tache demande de creer les statistiques Flutter.
+`lun4rmood/lib/features/statistics/statistics_page.dart`
+Utilite reelle : page Statistiques placeholder pour les futures tendances.
+A modifier si : une tache demande de faire evoluer l'ecran Statistiques.
 A eviter si : les donnees statistiques ne sont pas encore definies.
 
-`lun4rmood/lib/features/phoenix/`
-Utilite reelle : emplacement reserve pour le futur phoenix personnel.
-A modifier si : une tache demande explicitement l'ecran ou la logique visuelle du phoenix.
+`lun4rmood/lib/features/phoenix/phoenix_page.dart`
+Utilite reelle : page Phenix placeholder avec representation visuelle simple de l'oeuf.
+A modifier si : une tache demande explicitement l'ecran ou la logique visuelle du phenix.
 A eviter si : on travaille seulement sur la saisie de donnees.
 
-`lun4rmood/lib/features/settings/`
-Utilite reelle : emplacement reserve pour les futurs reglages.
-A modifier si : une tache demande un ecran de preferences ou d'export.
+`lun4rmood/lib/features/settings/settings_page.dart`
+Utilite reelle : page Parametres placeholder pour donnees locales, export, compte et apparence.
+A modifier si : une tache demande un ecran de preferences, d'export ou de controle local.
 A eviter si : aucun parcours de reglages n'est demande.
 
 ### engine/
@@ -122,10 +132,45 @@ A eviter si : aucun reglage utilisateur n'est demande.
 
 ### shared/
 
+`lun4rmood/lib/shared/widgets/app_page.dart`
+Utilite reelle : structure de page commune avec fond sombre, zone sure et scroll.
+A modifier si : on change le cadre commun des pages.
+A eviter si : une seule page a besoin d'un ajustement local.
+
+`lun4rmood/lib/shared/widgets/app_card.dart`
+Utilite reelle : carte visuelle commune pour les contenus encadres.
+A modifier si : on change l'apparence commune des cartes.
+A eviter si : le besoin concerne une carte tres specifique a une feature.
+
 `lun4rmood/lib/shared/widgets/`
 Utilite reelle : emplacement reserve pour les widgets reutilisables entre features.
 A modifier si : un widget est vraiment partage par plusieurs zones.
 A eviter si : le widget appartient clairement a une seule feature.
+
+`lun4rmood/lib/shared/theme/app_colors.dart`
+Utilite reelle : palette de couleurs centrale de Lun4rMood.
+A modifier si : une decision demande de changer la palette globale.
+A eviter si : on veut seulement tester une couleur locale dans une page.
+
+`lun4rmood/lib/shared/theme/app_spacing.dart`
+Utilite reelle : constantes d'espacement communes.
+A modifier si : l'echelle d'espacement globale change.
+A eviter si : une page a seulement besoin d'un arrangement local.
+
+`lun4rmood/lib/shared/theme/app_radius.dart`
+Utilite reelle : constantes de rayons communs.
+A modifier si : le style global des coins change.
+A eviter si : un composant isole a une contrainte specifique.
+
+`lun4rmood/lib/shared/theme/app_text_styles.dart`
+Utilite reelle : styles de texte communs.
+A modifier si : la typographie globale change.
+A eviter si : on veut seulement changer une phrase ou un libelle.
+
+`lun4rmood/lib/shared/theme/app_theme.dart`
+Utilite reelle : ThemeData sombre central utilise par l'application.
+A modifier si : on change les comportements Material globaux.
+A eviter si : on veut seulement modifier le contenu d'une page.
 
 `lun4rmood/lib/shared/theme/`
 Utilite reelle : emplacement reserve pour le theme visuel partage.
@@ -150,9 +195,14 @@ Modify if: the app must launch another global root.
 Avoid if: you only want to change a page, widget, or screen style.
 
 `lun4rmood/lib/app/app.dart`
-Real purpose: Lun4rMood MaterialApp root and current visual assembly point.
-Modify if: the global theme, app title, or launch page changes.
+Real purpose: Lun4rMood MaterialApp root, connected to the global theme and shell.
+Modify if: the global ThemeData, app title, or displayed root changes.
 Avoid if: you only want to edit the internal content of a feature.
+
+`lun4rmood/lib/app/app_shell.dart`
+Real purpose: tab navigation shell between the main MVP screens.
+Modify if: tabs, order, icons, or the page shown by a tab changes.
+Avoid if: you only want to edit the content of a page.
 
 `lun4rmood/lib/app/router.dart`
 Real purpose: reserved place for future navigation.
@@ -160,6 +210,11 @@ Modify if: explicit navigation is requested later.
 Avoid if: no complete navigation is requested yet.
 
 ### features/
+
+`lun4rmood/lib/features/home/home_page.dart`
+Real purpose: Home page for the MVP shell with product intent and fake summary.
+Modify if: home content or visible actions change.
+Avoid if: you want to change the navigation bar.
 
 `lun4rmood/lib/features/check_in/check_in_page.dart`
 Real purpose: main daily Check-in input page.
@@ -181,24 +236,24 @@ Real purpose: visual save button for the Check-in.
 Modify if: the label or visible action of the button changes.
 Avoid if: you want to add real storage without an explicit technical decision.
 
-`lun4rmood/lib/features/journal/`
-Real purpose: reserved place for the future journal feature.
-Modify if: a task asks to create the Flutter journal.
+`lun4rmood/lib/features/journal/journal_page.dart`
+Real purpose: Journal placeholder page for future reflections.
+Modify if: a task asks to evolve the Journal screen.
 Avoid if: you are only working on Check-in.
 
-`lun4rmood/lib/features/statistics/`
-Real purpose: reserved place for future statistics.
-Modify if: a task asks to create Flutter statistics.
+`lun4rmood/lib/features/statistics/statistics_page.dart`
+Real purpose: Statistics placeholder page for future trends.
+Modify if: a task asks to evolve the Statistics screen.
 Avoid if: statistical data is not defined yet.
 
-`lun4rmood/lib/features/phoenix/`
-Real purpose: reserved place for the future personal phoenix.
+`lun4rmood/lib/features/phoenix/phoenix_page.dart`
+Real purpose: Phoenix placeholder page with a simple visual egg representation.
 Modify if: a task explicitly asks for the phoenix screen or visual logic.
 Avoid if: you are only working on data input.
 
-`lun4rmood/lib/features/settings/`
-Real purpose: reserved place for future settings.
-Modify if: a task asks for preferences or export screens.
+`lun4rmood/lib/features/settings/settings_page.dart`
+Real purpose: Settings placeholder page for local data, export, account, and appearance.
+Modify if: a task asks for preferences, export, or local control screens.
 Avoid if: no settings flow is requested.
 
 ### engine/
@@ -259,10 +314,45 @@ Avoid if: no user setting is requested.
 
 ### shared/
 
+`lun4rmood/lib/shared/widgets/app_page.dart`
+Real purpose: common page structure with dark background, safe area, and scroll.
+Modify if: the common page frame changes.
+Avoid if: only one page needs a local adjustment.
+
+`lun4rmood/lib/shared/widgets/app_card.dart`
+Real purpose: common visual card for framed content.
+Modify if: the shared card appearance changes.
+Avoid if: the need concerns a feature-specific card.
+
 `lun4rmood/lib/shared/widgets/`
 Real purpose: reserved place for widgets reused across features.
 Modify if: a widget is truly shared by several areas.
 Avoid if: the widget clearly belongs to one feature only.
+
+`lun4rmood/lib/shared/theme/app_colors.dart`
+Real purpose: central Lun4rMood color palette.
+Modify if: a decision asks to change the global palette.
+Avoid if: you only want to test a local color in one page.
+
+`lun4rmood/lib/shared/theme/app_spacing.dart`
+Real purpose: shared spacing constants.
+Modify if: the global spacing scale changes.
+Avoid if: one page only needs a local layout adjustment.
+
+`lun4rmood/lib/shared/theme/app_radius.dart`
+Real purpose: shared radius constants.
+Modify if: the global corner style changes.
+Avoid if: one component has a specific constraint.
+
+`lun4rmood/lib/shared/theme/app_text_styles.dart`
+Real purpose: shared text styles.
+Modify if: global typography changes.
+Avoid if: you only want to change a sentence or label.
+
+`lun4rmood/lib/shared/theme/app_theme.dart`
+Real purpose: central dark ThemeData used by the app.
+Modify if: global Material behavior changes.
+Avoid if: you only want to edit page content.
 
 `lun4rmood/lib/shared/theme/`
 Real purpose: reserved place for shared visual theme.

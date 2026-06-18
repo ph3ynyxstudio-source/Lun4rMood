@@ -18,16 +18,16 @@ Il doit etre consulte avant les changements importants sur la base Flutter.
 ### Etat actuel du projet
 
 - Lun4rMood est maintenant base sur un nouveau projet Flutter.
-- L'application de demonstration Flutter demarre correctement sur Windows.
-- La logique Flutter generee n'a pas encore ete remplacee par la logique produit.
+- L'application affiche maintenant un shell visuel Flutter avec navigation inferieure.
+- Des tokens de theme centralises existent dans `lun4rmood/lib/shared/theme/`.
+- La page Check-in est integree au shell de navigation.
 - L'ancien MVP React/PWA reste un prototype avance, une validation de concept et une base d'apprentissage.
 - Aucune migration de code React n'est faite pour l'instant.
 - Aucune dependance de gestion d'etat, de stockage local ou de cloud n'est ajoutee a cette etape.
 
 ### Prochaines etapes
 
-- Definir progressivement la structure Flutter cible.
-- Mettre en place les premiers ecrans du MVP Flutter.
+- Completer progressivement les ecrans du MVP Flutter.
 - Integrer l'oeuf personnel comme element central du MVP Flutter.
 - Preparer un export visible et simple des donnees utilisateur.
 - Garder une approche Local First pour les donnees utilisateur.
@@ -52,16 +52,16 @@ It should be checked before important changes to the Flutter base.
 ### Current project state
 
 - Lun4rMood is now based on a new Flutter project.
-- The default Flutter demo app starts correctly on Windows.
-- The generated Flutter logic has not yet been replaced by product logic.
+- The app now shows a Flutter visual shell with bottom navigation.
+- Centralized theme tokens exist in `lun4rmood/lib/shared/theme/`.
+- The Check-in page is integrated into the navigation shell.
 - The previous React/PWA MVP remains an advanced prototype, a proof of concept, and a learning base.
 - No React code migration is being done at this stage.
 - No state management, local storage, or cloud dependency is added at this stage.
 
 ### Next steps
 
-- Define the target Flutter structure step by step.
-- Build the first screens of the Flutter MVP.
+- Complete the Flutter MVP screens step by step.
 - Integrate the personal egg as a central MVP element.
 - Prepare a visible and simple export for user data.
 - Keep a Local First approach for user data.

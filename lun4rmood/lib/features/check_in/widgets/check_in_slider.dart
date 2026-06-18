@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/theme/app_colors.dart';
+import '../../../shared/theme/app_text_styles.dart';
+
 class CheckInSlider extends StatelessWidget {
   const CheckInSlider({
     super.key,
@@ -24,17 +27,12 @@ class CheckInSlider extends StatelessWidget {
           children: [
             Text(
               label,
-              style: const TextStyle(
-                color: Color(0xFFE8EEF8),
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600),
             ),
             Text(
               '$roundedValue/10',
-              style: const TextStyle(
-                color: Color(0xFF9DB8E8),
-                fontSize: 15,
+              style: AppTextStyles.bodyMuted.copyWith(
+                color: AppColors.lunarAccent,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -42,10 +40,10 @@ class CheckInSlider extends StatelessWidget {
         ),
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
-            activeTrackColor: const Color(0xFF88AFFF),
-            inactiveTrackColor: const Color(0xFF263754),
-            thumbColor: const Color(0xFFD8E5FF),
-            overlayColor: const Color(0x3388AFFF),
+            activeTrackColor: AppColors.lunarAccent,
+            inactiveTrackColor: AppColors.border,
+            thumbColor: AppColors.textPrimary,
+            overlayColor: AppColors.lunarOverlay,
             trackHeight: 5,
           ),
           child: Slider(
