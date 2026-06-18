@@ -11,6 +11,7 @@ Il doit etre consulte avant les changements importants sur la base Flutter.
 ### Documents
 
 - [Architecture Flutter](./ARCHITECTURE_FLUTTER.md)
+- [Commandes Flutter habituelles](./COMMANDES_FLUTTER.md)
 - [Navigation des composants](./NAVIGATION_COMPONENTS.md)
 - [Migration React vers Flutter](./MIGRATION_REACT_TO_FLUTTER.md)
 - [Decisions produit](./PRODUCT_DECISIONS.md)
@@ -45,6 +46,7 @@ It should be checked before important changes to the Flutter base.
 ### Documents
 
 - [Flutter Architecture](./ARCHITECTURE_FLUTTER.md)
+- [Usual Flutter Commands](./COMMANDES_FLUTTER.md)
 - [Components Navigation](./NAVIGATION_COMPONENTS.md)
 - [React to Flutter Migration](./MIGRATION_REACT_TO_FLUTTER.md)
 - [Product Decisions](./PRODUCT_DECISIONS.md)
