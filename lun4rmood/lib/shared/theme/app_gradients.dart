@@ -10,8 +10,8 @@ class AppGradients {
     end: Alignment.bottomRight,
     colors: [
       AppColors.backgroundDeep,
-      AppColors.background,
-      AppColors.surface,
+      Color.fromARGB(255, 5, 5, 27),
+      Color.fromARGB(255, 8, 7, 29),
     ],
   );
 
@@ -19,27 +19,21 @@ class AppGradients {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      AppColors.lunaCyan,
-      AppColors.lunaPurple,
+      Color.fromARGB(255, 5, 187, 190),
+      Color.fromARGB(255, 83, 25, 183),
     ],
   );
 
   static const LinearGradient purplePink = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [
-      AppColors.lunaPurple,
-      AppColors.lunaPink,
-    ],
+    colors: [AppColors.lunaPurple, AppColors.lunaPink],
   );
 
   static const LinearGradient cyanPink = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [
-      AppColors.lunaCyan,
-      AppColors.lunaPink,
-    ],
+    colors: [AppColors.lunaCyan, AppColors.lunaPink],
   );
 
   static const LinearGradient darkPurple = LinearGradient(
@@ -48,7 +42,7 @@ class AppGradients {
     colors: [
       AppColors.backgroundDeep,
       AppColors.surface,
-      AppColors.lunaPurple,
+      Color.fromARGB(255, 83, 44, 255),
     ],
   );
 }

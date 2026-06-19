@@ -18,8 +18,7 @@ Riverpod, Hive, Firebase et go_router ne sont pas encore ajoutes maintenant.
 - `app` : point d'assemblage de l'application, configuration generale et future navigation.
 - `features` : ecrans et parcours fonctionnels, par exemple check-in, journal, statistiques, phoenix et reglages.
 - `engine` : logique metier interne, calculs, insights et regles d'evolution du phoenix personnel.
-- `data` : acces aux donnees locales, stockage, repositories, export et future sauvegarde optionnelle.
-- `models` : objets de donnees du domaine, par exemple entree d'humeur, entree de journal, profil phoenix ou reglages.
+- `data` : modeles serialisables, acces local, repositories, confidentialite, export et future sauvegarde optionnelle.
 - `shared` : widgets partages, theme, utilitaires et helpers reutilisables.
 
 ### Future arborescence cible
@@ -41,14 +40,15 @@ lib/
     insight_engine.dart
     phoenix_engine.dart
   data/
+    models/
+      user/
+      derived/
+      settings/
+      privacy/
     local/
     firebase/
     repositories/
-  models/
-    mood_entry.dart
-    journal_entry.dart
-    phoenix_profile.dart
-    user_settings.dart
+    privacy/
   shared/
     widgets/
     theme/
@@ -79,8 +79,7 @@ Riverpod, Hive, Firebase, and go_router are not added now.
 - `app`: application assembly point, general configuration, and future navigation.
 - `features`: functional screens and flows, such as check-in, journal, statistics, phoenix, and settings.
 - `engine`: internal product logic, calculations, insights, and personal phoenix evolution rules.
-- `data`: local data access, storage, repositories, export, and future optional backup.
-- `models`: domain data objects, such as mood entry, journal entry, phoenix profile, or settings.
+- `data`: serializable models, local access, repositories, privacy, export, and future optional backup.
 - `shared`: shared widgets, theme, utilities, and reusable helpers.
 
 ### Future target tree
@@ -102,14 +101,15 @@ lib/
     insight_engine.dart
     phoenix_engine.dart
   data/
+    models/
+      user/
+      derived/
+      settings/
+      privacy/
     local/
     firebase/
     repositories/
-  models/
-    mood_entry.dart
-    journal_entry.dart
-    phoenix_profile.dart
-    user_settings.dart
+    privacy/
   shared/
     widgets/
     theme/

@@ -10,10 +10,16 @@ class AppCard extends StatelessWidget {
     super.key,
     required this.child,
     this.padding = const EdgeInsets.all(AppSpacing.md),
+    this.backgroundColor,
+    this.borderColor,
+    this.boxShadow,
   });
 
   final Widget child;
   final EdgeInsetsGeometry padding;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final List<BoxShadow>? boxShadow;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +27,13 @@ class AppCard extends StatelessWidget {
       width: double.infinity,
       padding: padding,
       decoration: BoxDecoration(
-        color: AppColors.card,
+        color: backgroundColor ?? AppColors.card,
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(color: AppColors.border),
-        boxShadow: AppShadows.sm,
+        border: Border.all(
+          color: borderColor ?? AppColors.cardBorder,
+          width: 1,
+        ),
+        boxShadow: boxShadow ?? AppShadows.sm,
       ),
       child: child,
     );

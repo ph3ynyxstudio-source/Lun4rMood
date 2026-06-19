@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../theme/app_gradients.dart';
 import '../theme/app_spacing.dart';
+import 'app_logo_header.dart';
+import 'starry_background.dart';
 
 class AppPage extends StatelessWidget {
   const AppPage({
     super.key,
     required this.children,
+    this.showLogo = true,
   });
 
   final List<Widget> children;
+  final bool showLogo;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
-      child: DecoratedBox(
-        decoration: const BoxDecoration(gradient: AppGradients.background),
+      child: StarryBackground(
         child: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(
@@ -26,7 +28,10 @@ class AppPage extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: children,
+              children: [
+                if (showLogo) const AppLogoPageHeader(),
+                ...children,
+              ],
             ),
           ),
         ),

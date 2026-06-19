@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../shared/theme/app_colors.dart';
+import '../../shared/theme/app_radius.dart';
 import '../../shared/theme/app_spacing.dart';
 import '../../shared/theme/app_text_styles.dart';
 import '../../shared/widgets/app_card.dart';
@@ -44,6 +45,13 @@ class _CheckInPageState extends State<CheckInPage> {
       children: [
         const _CheckInHeader(),
         const SizedBox(height: AppSpacing.lg),
+        _DashboardOverviewCard(
+          mood: _mood,
+          energy: _energy,
+          stress: _stress,
+          craving: _craving,
+        ),
+        const SizedBox(height: AppSpacing.md),
         AppCard(
           child: Column(
             children: [
@@ -68,6 +76,7 @@ class _CheckInPageState extends State<CheckInPage> {
               CheckInSlider(
                 label: 'Envie ou consommation',
                 value: _craving,
+                color: AppColors.consumptionAccent,
                 onChanged: (value) => setState(() => _craving = value),
               ),
             ],
@@ -93,25 +102,86 @@ class _CheckInHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Lun△rMood',
-          style: TextStyle(
-            color: AppColors.lunarAccent,
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0,
-          ),
-        ),
-        SizedBox(height: AppSpacing.md),
-        Text(
-          'Check-in du jour',
+          'Dashboard du jour',
           style: AppTextStyles.titleLarge,
         ),
         SizedBox(height: AppSpacing.sm),
         Text(
-          'Prends un moment pour observer ton etat actuel.',
+          'Observe ton etat actuel, puis garde le check-in comme point d entree principal.',
           style: AppTextStyles.bodyMuted,
         ),
       ],
+    );
+  }
+}
+
+class _DashboardOverviewCard extends StatelessWidget {
+  const _DashboardOverviewCard({
+    required this.mood,
+    required this.energy,
+    required this.stress,
+    required this.craving,
+  });
+
+  final double mood;
+  final double energy;
+  final double stress;
+  final double craving;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Etat actuel', style: AppTextStyles.titleMedium),
+          const SizedBox(height: AppSpacing.sm),
+          const Text(
+            'Cette zone pourra devenir le resume principal quand le Check-in passera en premier ecran.',
+            style: AppTextStyles.bodyMuted,
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: [
+              _DashboardChip(label: 'Humeur', value: mood),
+              _DashboardChip(label: 'Energie', value: energy),
+              _DashboardChip(label: 'Stress', value: stress),
+              _DashboardChip(label: 'Envie', value: craving),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DashboardChip extends StatelessWidget {
+  const _DashboardChip({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final double value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadius.pill),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Text(
+        '$label ${value.round()}/10',
+        style: AppTextStyles.caption.copyWith(color: AppColors.textPrimary),
+      ),
     );
   }
 }

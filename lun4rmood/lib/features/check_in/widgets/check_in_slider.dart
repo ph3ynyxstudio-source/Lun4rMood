@@ -9,11 +9,13 @@ class CheckInSlider extends StatelessWidget {
     required this.label,
     required this.value,
     required this.onChanged,
+    this.color = AppColors.lunarAccent,
   });
 
   final String label;
   final double value;
   final ValueChanged<double> onChanged;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class CheckInSlider extends StatelessWidget {
             Text(
               '$roundedValue/10',
               style: AppTextStyles.bodyMuted.copyWith(
-                color: AppColors.lunarAccent,
+                color: color,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -40,10 +42,10 @@ class CheckInSlider extends StatelessWidget {
         ),
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
-            activeTrackColor: AppColors.lunarAccent,
+            activeTrackColor: color,
             inactiveTrackColor: AppColors.border,
             thumbColor: AppColors.textPrimary,
-            overlayColor: AppColors.lunarOverlay,
+            overlayColor: color.withAlpha(51),
             trackHeight: 5,
           ),
           child: Slider(

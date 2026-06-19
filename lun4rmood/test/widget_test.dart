@@ -1,30 +1,92 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:lun4rmood/main.dart';
+import 'package:lun4rmood/app/app.dart';
+import 'package:lun4rmood/data/local/in_memory_user_daily_entry_repository.dart';
+import 'package:lun4rmood/data/models/user/user_daily_entry.dart';
+import 'package:lun4rmood/features/check_in/widgets/check_in_quick_entry.dart';
+import 'package:lun4rmood/features/journal/journal_page.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Lun4rMood shell renders main navigation', (tester) async {
+    await tester.pumpWidget(const Lun4rMoodApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('Accueil'), findsOneWidget);
+    expect(find.text('Check-in'), findsNothing);
+    expect(find.text('Journal'), findsOneWidget);
+    expect(find.text('Statistiques'), findsOneWidget);
+    expect(find.text('Phénix'), findsOneWidget);
+    expect(find.text('Paramètres'), findsOneWidget);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+  testWidgets('Quick capture is collapsed and expands on tap', (tester) async {
+    final repository = InMemoryUserDailyEntryRepository();
+    addTearDown(repository.close);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: CheckInQuickEntry(
+              date: DateTime(2026, 6, 19),
+              dateLabel: 'vendredi 19 juin',
+              repository: repository,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('CAPTURE RAPIDE'), findsOneWidget);
+    expect(find.text('Stress'), findsNothing);
+
+    await tester.tap(find.text('CAPTURE RAPIDE'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Stress'), findsOneWidget);
+    expect(find.text('Enregistrer'), findsOneWidget);
+
+    await tester.tap(find.text('Enregistrer'));
+    await tester.pumpAndSettle();
+
+    final savedEntry = await repository.getByDate(DateTime(2026, 6, 19));
+    expect(savedEntry, isNotNull);
+    expect(savedEntry!.dateKey, '2026-06-19');
+  });
+
+  testWidgets('Journal selects a day and displays its entry', (tester) async {
+    final repository = InMemoryUserDailyEntryRepository();
+    addTearDown(repository.close);
+    final timestamp = DateTime.utc(2026, 6, 18, 12);
+    final entry = UserDailyEntry(
+      date: DateTime(2026, 6, 18),
+      emotionLevel: 7,
+      dominantEmotion: 'Calme',
+      energy: 6,
+      stress: 3,
+      consumption: 1,
+      shortNote: 'Journée stable.',
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    );
+    await repository.upsert(entry);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: JournalPage(
+          repository: repository,
+          referenceDate: DateTime(2026, 6, 19),
+        ),
+      ),
+    );
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Aucune entrée pour cette journée.'), findsOneWidget);
+    expect(find.text('Calme'), findsNothing);
+
+    await tester.tap(find.text('18'));
+    await tester.pump();
+
+    expect(find.text('Calme'), findsOneWidget);
+    expect(find.text('Journée stable.'), findsOneWidget);
   });
 }

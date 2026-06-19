@@ -18,7 +18,7 @@ A modifier si : on change le ThemeData global, le titre de l'app ou la racine af
 A eviter si : on veut seulement modifier le contenu interne d'une feature.
 
 `lun4rmood/lib/app/app_shell.dart`
-Utilite reelle : shell de navigation par onglets entre les ecrans principaux du MVP.
+Utilite reelle : shell de navigation a cinq onglets entre les ecrans principaux du MVP; le Check-in passe par la capture rapide du Dashboard.
 A modifier si : on change les onglets, leur ordre, leurs icones ou la page affichee par onglet.
 A eviter si : on veut seulement modifier le contenu d'une page.
 
@@ -30,8 +30,8 @@ A eviter si : aucune route explicite n'est demandee.
 ### features/
 
 `lun4rmood/lib/features/home/home_page.dart`
-Utilite reelle : page Accueil du shell MVP avec intention produit et resume fictif.
-A modifier si : on change le contenu d'accueil ou les actions visibles.
+Utilite reelle : dashboard Accueil du shell MVP, base sur la maquette Flutter v1.
+A modifier si : on change la section lunaire, le Check-in integre, le resume du jour ou la bulle CRYSTAPH3Y.
 A eviter si : on veut changer la barre de navigation.
 
 `lun4rmood/lib/features/intro/splash_intro_view.dart`
@@ -40,7 +40,7 @@ A modifier si : une tache demande de faire evoluer l'intro, la lune, le bouton E
 A eviter si : on veut changer le demarrage actuel de l'application sans decision explicite.
 
 `lun4rmood/lib/features/check_in/check_in_page.dart`
-Utilite reelle : page principale de saisie quotidienne du Check-in.
+Utilite reelle : vue complete de saisie quotidienne conservee hors navigation principale; ses widgets alimentent la capture rapide du Dashboard.
 A modifier si : on change la structure generale du Check-in.
 A eviter si : on veut seulement modifier un slider, un champ ou un bouton isole.
 
@@ -48,6 +48,11 @@ A eviter si : on veut seulement modifier un slider, un champ ou un bouton isole.
 Utilite reelle : widget reutilisable pour les valeurs /10 du Check-in.
 A modifier si : on change l'apparence ou le comportement commun des sliders.
 A eviter si : on veut changer uniquement le texte ou l'ordre des sections de la page.
+
+`lun4rmood/lib/features/check_in/widgets/check_in_quick_entry.dart`
+Utilite reelle : capture rapide du Dashboard qui cree ou met a jour la `UserDailyEntry` du jour via repository.
+A modifier si : on change le formulaire embarque ou le mapping vers les donnees utilisateur brutes.
+A eviter si : on veut seulement changer la navigation principale.
 
 `lun4rmood/lib/features/check_in/widgets/check_in_note_field.dart`
 Utilite reelle : champ de note courte du Check-in.
@@ -60,9 +65,19 @@ A modifier si : on change le libelle ou l'action visible du bouton.
 A eviter si : on veut ajouter du stockage reel sans decision technique explicite.
 
 `lun4rmood/lib/features/journal/journal_page.dart`
-Utilite reelle : page Journal placeholder pour les futures reflexions.
-A modifier si : une tache demande de faire evoluer l'ecran Journal.
-A eviter si : on travaille seulement sur le Check-in.
+Utilite reelle : ligne du temps quotidienne qui observe les `UserDailyEntry` du repository.
+A modifier si : on change la navigation entre les jours ou la presentation d'une entree Journal.
+A eviter si : on veut ajouter une persistence sans decision technique explicite.
+
+`lun4rmood/lib/features/journal/widgets/journal_timeline.dart`
+Utilite reelle : liste horizontale swipeable des jours et gestion visuelle de la selection.
+A modifier si : on change le nombre, le format ou l'apparence des jours visibles.
+A eviter si : on change seulement le contenu du resume quotidien.
+
+`lun4rmood/lib/features/journal/widgets/journal_day_summary.dart`
+Utilite reelle : carte de resume d'une entree Journal ou etat vide de la journee.
+A modifier si : on change les metriques, les notes ou l'etat vide affiches.
+A eviter si : on change seulement la navigation temporelle.
 
 `lun4rmood/lib/features/statistics/statistics_page.dart`
 Utilite reelle : page Statistiques placeholder pour les futures tendances.
@@ -99,9 +114,9 @@ A eviter si : on travaille sur un ecran sans logique d'evolution.
 ### data/
 
 `lun4rmood/lib/data/local/`
-Utilite reelle : emplacement reserve pour le futur stockage local.
-A modifier si : une tache demande explicitement la persistence locale.
-A eviter si : le besoin est seulement visuel ou sans sauvegarde.
+Utilite reelle : adaptateurs locaux; contient actuellement le repository en memoire non persistant.
+A modifier si : on change l'implementation locale derriere un contrat repository.
+A eviter si : on veut ajouter Firebase ou contourner les repositories.
 
 `lun4rmood/lib/data/firebase/`
 Utilite reelle : emplacement reserve pour une future sauvegarde Firebase optionnelle.
@@ -109,38 +124,51 @@ A modifier si : Firebase est explicitement demande plus tard.
 A eviter si : Firebase n'est pas dans le perimetre de la tache.
 
 `lun4rmood/lib/data/repositories/`
-Utilite reelle : emplacement reserve pour les futurs repositories.
-A modifier si : une tache demande de relier l'UI a une source de donnees.
-A eviter si : aucun stockage ou source de donnees n'est demande.
+Utilite reelle : contrats d'acces aux donnees independants du futur moteur de stockage.
+A modifier si : les operations de lecture, observation ou sauvegarde evoluent.
+A eviter si : on change seulement une implementation locale.
 
-### models/
+`lun4rmood/lib/data/models/user/user_daily_entry.dart`
+Utilite reelle : source de verite des donnees quotidiennes brutes creees par l'utilisateur.
+A modifier si : le schema canonique Capture rapide / Journal / Statistiques evolue.
+A eviter si : on ajoute une donnee calculee ou technique.
 
-`lun4rmood/lib/models/mood_entry.dart`
-Utilite reelle : emplacement reserve pour le futur modele d'humeur.
-A modifier si : une tache demande de definir les donnees d'humeur.
-A eviter si : on cree seulement une interface sans modele persistant.
+`lun4rmood/lib/data/models/derived/daily_summary.dart`
+Utilite reelle : donnees derivees localement, separees des entrees utilisateur brutes.
+A modifier si : le contrat des resumes, tendances, tags ou indicateurs evolue.
+A eviter si : on change la saisie utilisateur.
 
-`lun4rmood/lib/models/journal_entry.dart`
-Utilite reelle : emplacement reserve pour le futur modele d'entree de journal.
-A modifier si : une tache demande de definir le journal.
-A eviter si : le journal n'est pas dans le perimetre.
+`lun4rmood/lib/data/models/settings/user_settings.dart`
+Utilite reelle : theme et preferences UI/application, sans consentements.
+A modifier si : les preferences utilisateur evoluent.
+A eviter si : on ajoute une decision de confidentialite.
 
-`lun4rmood/lib/models/phoenix_profile.dart`
-Utilite reelle : emplacement reserve pour le futur profil phoenix.
-A modifier si : une tache demande les donnees de l'oeuf ou du phoenix.
-A eviter si : on ne travaille pas sur le phoenix.
+`lun4rmood/lib/data/models/privacy/consent_settings.dart`
+Utilite reelle : consentements explicites cloud, analytics, recherche et fonctions IA, desactives par defaut.
+A modifier si : la gouvernance des consentements evolue.
+A eviter si : on change seulement une preference visuelle.
 
-`lun4rmood/lib/models/user_settings.dart`
-Utilite reelle : emplacement reserve pour les futurs reglages utilisateur.
-A modifier si : une tache demande des preferences persistantes.
-A eviter si : aucun reglage utilisateur n'est demande.
+`lun4rmood/lib/data/privacy/user_daily_entry_privacy_mapper.dart`
+Utilite reelle : projection sans note courte ni note Journal pour les futurs exports consentis.
+A modifier si : les regles d'exclusion de donnees evoluent.
+A eviter si : on veut envoyer des donnees ou pretendre garantir une anonymisation complete.
 
 ### shared/
 
 `lun4rmood/lib/shared/widgets/app_page.dart`
-Utilite reelle : structure de page commune avec fond sombre, zone sure et scroll.
-A modifier si : on change le cadre commun des pages.
+Utilite reelle : structure de page commune avec logo haut centre, fond sombre etoile, zone sure et scroll.
+A modifier si : on change le cadre commun des pages principales.
 A eviter si : une seule page a besoin d'un ajustement local.
+
+`lun4rmood/lib/shared/widgets/app_logo_header.dart`
+Utilite reelle : logo Lun4rMood centre reutilisable pour les pages principales.
+A modifier si : on change l'asset, la taille ou l'espacement du logo global.
+A eviter si : un ecran isole a besoin d'un logo specifique.
+
+`lun4rmood/lib/shared/widgets/starry_background.dart`
+Utilite reelle : fond noir etoile subtil reutilisable derriere les pages.
+A modifier si : on change la densite, l'opacite ou le placement global des etoiles.
+A eviter si : un fond local doit rester different pour une animation specifique.
 
 `lun4rmood/lib/shared/widgets/app_card.dart`
 Utilite reelle : carte visuelle commune pour les contenus encadres.
@@ -215,7 +243,7 @@ Modify if: the global ThemeData, app title, or displayed root changes.
 Avoid if: you only want to edit the internal content of a feature.
 
 `lun4rmood/lib/app/app_shell.dart`
-Real purpose: tab navigation shell between the main MVP screens.
+Real purpose: five-tab navigation shell between the main MVP screens; Check-in is accessed through the Dashboard quick capture.
 Modify if: tabs, order, icons, or the page shown by a tab changes.
 Avoid if: you only want to edit the content of a page.
 
@@ -227,8 +255,8 @@ Avoid if: no explicit route is requested.
 ### features/
 
 `lun4rmood/lib/features/home/home_page.dart`
-Real purpose: Home page for the MVP shell with product intent and fake summary.
-Modify if: home content or visible actions change.
+Real purpose: Home dashboard for the MVP shell, based on the Flutter v1 reference mockup.
+Modify if: the lunar section, embedded Check-in, daily summary, or CRYSTAPH3Y bubble changes.
 Avoid if: you want to change the navigation bar.
 
 `lun4rmood/lib/features/intro/splash_intro_view.dart`
@@ -237,7 +265,7 @@ Modify if: a task asks to evolve the intro, moon, Enter button, or future animat
 Avoid if: you want to change the current app startup without an explicit decision.
 
 `lun4rmood/lib/features/check_in/check_in_page.dart`
-Real purpose: main daily Check-in input page.
+Real purpose: full daily Check-in view kept outside the main navigation; its widgets support the Dashboard quick capture.
 Modify if: the overall Check-in structure changes.
 Avoid if: you only want to modify an isolated slider, field, or button.
 
@@ -245,6 +273,11 @@ Avoid if: you only want to modify an isolated slider, field, or button.
 Real purpose: reusable widget for Check-in /10 values.
 Modify if: the shared look or behavior of sliders changes.
 Avoid if: you only want to change page text or section order.
+
+`lun4rmood/lib/features/check_in/widgets/check_in_quick_entry.dart`
+Real purpose: Dashboard quick capture that creates or updates the day's `UserDailyEntry` through a repository.
+Modify if: the embedded form or raw user-data mapping changes.
+Avoid if: you only want to change the main navigation.
 
 `lun4rmood/lib/features/check_in/widgets/check_in_note_field.dart`
 Real purpose: short note field for the Check-in.
@@ -257,9 +290,19 @@ Modify if: the label or visible action of the button changes.
 Avoid if: you want to add real storage without an explicit technical decision.
 
 `lun4rmood/lib/features/journal/journal_page.dart`
-Real purpose: Journal placeholder page for future reflections.
-Modify if: a task asks to evolve the Journal screen.
-Avoid if: you are only working on Check-in.
+Real purpose: selectable daily timeline observing repository `UserDailyEntry` records.
+Modify if: navigation between days or Journal entry presentation changes.
+Avoid if: persistence is requested without an explicit technical decision.
+
+`lun4rmood/lib/features/journal/widgets/journal_timeline.dart`
+Real purpose: horizontally swipeable day list with visual selection handling.
+Modify if: the number, format, or appearance of visible days changes.
+Avoid if: only the daily summary content changes.
+
+`lun4rmood/lib/features/journal/widgets/journal_day_summary.dart`
+Real purpose: daily Journal entry summary card or empty-day state.
+Modify if: displayed metrics, notes, or the empty state changes.
+Avoid if: only timeline navigation changes.
 
 `lun4rmood/lib/features/statistics/statistics_page.dart`
 Real purpose: Statistics placeholder page for future trends.
@@ -296,9 +339,9 @@ Avoid if: you are working on a screen without evolution logic.
 ### data/
 
 `lun4rmood/lib/data/local/`
-Real purpose: reserved place for future local storage.
-Modify if: a task explicitly asks for local persistence.
-Avoid if: the need is only visual or has no saving.
+Real purpose: local adapters; currently contains the non-persistent in-memory repository.
+Modify if: the local implementation behind a repository contract changes.
+Avoid if: Firebase is being added or repositories are being bypassed.
 
 `lun4rmood/lib/data/firebase/`
 Real purpose: reserved place for future optional Firebase backup.
@@ -306,38 +349,51 @@ Modify if: Firebase is explicitly requested later.
 Avoid if: Firebase is outside the task scope.
 
 `lun4rmood/lib/data/repositories/`
-Real purpose: reserved place for future repositories.
-Modify if: a task asks to connect UI to a data source.
-Avoid if: no storage or data source is requested.
+Real purpose: data access contracts independent from the future storage engine.
+Modify if: read, observation, or save operations evolve.
+Avoid if: only a local implementation changes.
 
-### models/
+`lun4rmood/lib/data/models/user/user_daily_entry.dart`
+Real purpose: source of truth for raw daily data created by the user.
+Modify if: the canonical Quick Capture / Journal / Statistics schema evolves.
+Avoid if: derived or technical data is being added.
 
-`lun4rmood/lib/models/mood_entry.dart`
-Real purpose: reserved place for the future mood model.
-Modify if: a task asks to define mood data.
-Avoid if: you are only creating an interface without a persistent model.
+`lun4rmood/lib/data/models/derived/daily_summary.dart`
+Real purpose: locally derived data separated from raw user entries.
+Modify if: the summary, trend, tag, or indicator contract evolves.
+Avoid if: user input changes.
 
-`lun4rmood/lib/models/journal_entry.dart`
-Real purpose: reserved place for the future journal entry model.
-Modify if: a task asks to define the journal.
-Avoid if: the journal is outside scope.
+`lun4rmood/lib/data/models/settings/user_settings.dart`
+Real purpose: theme and UI/application preferences without consent.
+Modify if: user preferences evolve.
+Avoid if: a privacy decision is being added.
 
-`lun4rmood/lib/models/phoenix_profile.dart`
-Real purpose: reserved place for the future phoenix profile.
-Modify if: a task asks for egg or phoenix data.
-Avoid if: you are not working on the phoenix.
+`lun4rmood/lib/data/models/privacy/consent_settings.dart`
+Real purpose: explicit cloud, analytics, research, and AI-feature consent, disabled by default.
+Modify if: consent governance evolves.
+Avoid if: only a visual preference changes.
 
-`lun4rmood/lib/models/user_settings.dart`
-Real purpose: reserved place for future user settings.
-Modify if: a task asks for persistent preferences.
-Avoid if: no user setting is requested.
+`lun4rmood/lib/data/privacy/user_daily_entry_privacy_mapper.dart`
+Real purpose: projection without short or Journal notes for future consented exports.
+Modify if: data exclusion rules evolve.
+Avoid if: data should be sent or full anonymization is being claimed.
 
 ### shared/
 
 `lun4rmood/lib/shared/widgets/app_page.dart`
-Real purpose: common page structure with dark background, safe area, and scroll.
-Modify if: the common page frame changes.
+Real purpose: common page structure with centered top logo, dark starry background, safe area, and scroll.
+Modify if: the main page frame changes.
 Avoid if: only one page needs a local adjustment.
+
+`lun4rmood/lib/shared/widgets/app_logo_header.dart`
+Real purpose: reusable centered Lun4rMood logo for main pages.
+Modify if: the global logo asset, size, or spacing changes.
+Avoid if: an isolated screen needs a specific logo.
+
+`lun4rmood/lib/shared/widgets/starry_background.dart`
+Real purpose: reusable subtle black starry background behind pages.
+Modify if: global star density, opacity, or placement changes.
+Avoid if: a local background must stay different for a specific animation.
 
 `lun4rmood/lib/shared/widgets/app_card.dart`
 Real purpose: common visual card for framed content.

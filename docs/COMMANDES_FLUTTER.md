@@ -47,7 +47,44 @@ flutter run -d chrome
 Lancer sur un appareil ou emulateur precis :
 
 ```powershell
-flutter run -d <device_id>
+flutter run -d REAL_DEVICE_ID
+```
+
+Remplacer `REAL_DEVICE_ID` par l'identifiant affiche par `flutter devices`.
+Ne pas copier les chevrons `< >` dans PowerShell.
+
+### Voir les changements en temps reel sur Android
+
+Depuis la racine du depot Lun4rMood :
+
+```powershell
+cd lun4rmood
+flutter pub get
+flutter devices
+flutter run -d REAL_DEVICE_ID
+```
+
+Si le telephone Android est le seul appareil connecte, cette commande suffit souvent :
+
+```powershell
+flutter run
+```
+
+Pendant que `flutter run` reste ouvert :
+
+- appuyer sur `r` dans le terminal pour faire un hot reload ;
+- appuyer sur `R` pour faire un hot restart ;
+- appuyer sur `q` pour quitter.
+
+Il n'est pas necessaire de relancer un build complet a chaque modification Dart/UI.
+Utiliser `r` pour la plupart des changements visuels.
+Utiliser `R` si l'etat de l'application semble bloque ou si un changement ne se voit pas.
+
+Apres une modification de `pubspec.yaml`, l'ajout d'un asset, une modification native Android ou un probleme d'asset non visible, relancer proprement :
+
+```powershell
+flutter pub get
+flutter run -d REAL_DEVICE_ID
 ```
 
 ### Verifier le code
@@ -149,8 +186,10 @@ flutter emulators
 Lancer un emulateur :
 
 ```powershell
-flutter emulators --launch <emulator_id>
+flutter emulators --launch REAL_EMULATOR_ID
 ```
+
+Remplacer `REAL_EMULATOR_ID` par l'identifiant affiche par `flutter emulators`.
 
 Voir les logs :
 
@@ -192,4 +231,12 @@ flutter test
 flutter devices
 flutter run -d windows
 flutter run -d chrome
+flutter run -d REAL_DEVICE_ID
 ```
+
+Replace `REAL_DEVICE_ID` with the real id shown by `flutter devices`.
+If the Android phone is the only connected device, `flutter run` is usually enough.
+
+While `flutter run` stays open, press `r` for hot reload, `R` for hot restart, and `q` to quit.
+You do not need to rebuild after every Dart/UI change.
+After editing `pubspec.yaml`, adding assets, or changing native Android files, run `flutter pub get` and start the app again.

@@ -112,7 +112,7 @@ class _MoonStage extends StatelessWidget {
               gradient: RadialGradient(
                 colors: [
                   AppColors.lunarGlow,
-                  Color(0x0000FCFF),
+                  Color(0x004CC9D0),
                 ],
               ),
             ),
