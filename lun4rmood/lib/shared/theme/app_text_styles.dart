@@ -5,18 +5,34 @@ import 'app_colors.dart';
 class AppTextStyles {
   const AppTextStyles._();
 
+  static const TextStyle display = TextStyle(
+    color: AppColors.textPrimary,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0,
+    height: 1.1,
+  );
+
   static const TextStyle titleLarge = TextStyle(
     color: AppColors.textPrimary,
-    fontSize: 30,
-    fontWeight: FontWeight.w800,
+    fontSize: 28,
+    fontWeight: FontWeight.w700,
     letterSpacing: 0,
     height: 1.15,
   );
 
   static const TextStyle titleMedium = TextStyle(
     color: AppColors.textPrimary,
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0,
+    height: 1.25,
+  );
+
+  static const TextStyle titleSmall = TextStyle(
+    color: AppColors.textPrimary,
     fontSize: 20,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     letterSpacing: 0,
     height: 1.25,
   );
@@ -31,15 +47,23 @@ class AppTextStyles {
 
   static const TextStyle bodyMuted = TextStyle(
     color: AppColors.textSecondary,
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: FontWeight.w400,
     letterSpacing: 0,
     height: 1.45,
   );
 
+  static const TextStyle small = TextStyle(
+    color: AppColors.textSecondary,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0,
+    height: 1.35,
+  );
+
   static const TextStyle caption = TextStyle(
     color: AppColors.textMuted,
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: FontWeight.w500,
     letterSpacing: 0,
     height: 1.35,
@@ -48,7 +72,7 @@ class AppTextStyles {
   static const TextStyle button = TextStyle(
     color: AppColors.buttonText,
     fontSize: 16,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     letterSpacing: 0,
   );
 }

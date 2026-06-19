@@ -17,18 +17,22 @@ class AppTheme {
         brightness: Brightness.dark,
         primary: AppColors.lunarAccent,
         secondary: AppColors.crystalAccent,
+        tertiary: AppColors.phoenixAccent,
         error: AppColors.softError,
         surface: AppColors.surface,
       ),
       textTheme: const TextTheme(
+        displayMedium: AppTextStyles.display,
         headlineLarge: AppTextStyles.titleLarge,
         titleLarge: AppTextStyles.titleMedium,
+        titleMedium: AppTextStyles.titleSmall,
         bodyMedium: AppTextStyles.body,
-        bodySmall: AppTextStyles.caption,
+        bodySmall: AppTextStyles.small,
+        labelSmall: AppTextStyles.caption,
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: AppColors.surface,
-        indicatorColor: AppColors.card,
+        backgroundColor: AppColors.backgroundDeep,
+        indicatorColor: AppColors.cardElevated,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final color = states.contains(WidgetState.selected)
               ? AppColors.textPrimary
@@ -42,6 +46,28 @@ class AppTheme {
           return IconThemeData(color: color, size: 22);
         }),
       ),
+      sliderTheme: const SliderThemeData(
+        activeTrackColor: AppColors.lunarAccent,
+        inactiveTrackColor: AppColors.border,
+        thumbColor: AppColors.textPrimary,
+        overlayColor: AppColors.lunarOverlay,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColors.surface,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          borderSide: const BorderSide(color: AppColors.border),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          borderSide: const BorderSide(color: AppColors.border),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          borderSide: const BorderSide(color: AppColors.lunarAccent),
+        ),
+      ),
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: AppColors.card,
         contentTextStyle: TextStyle(color: AppColors.textPrimary),
@@ -51,7 +77,7 @@ class AppTheme {
           backgroundColor: AppColors.lunarAccent,
           foregroundColor: AppColors.buttonText,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.lg),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
           ),
           textStyle: AppTextStyles.button,
         ),

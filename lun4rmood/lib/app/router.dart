@@ -1,1 +1,5 @@
-// Navigation setup will be defined here later.
+class AppRoutes {
+  const AppRoutes._();
+
+  static const String introSplash = '/intro-splash';
+}

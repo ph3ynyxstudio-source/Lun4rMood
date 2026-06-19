@@ -23,9 +23,9 @@ A modifier si : on change les onglets, leur ordre, leurs icones ou la page affic
 A eviter si : on veut seulement modifier le contenu d'une page.
 
 `lun4rmood/lib/app/router.dart`
-Utilite reelle : emplacement reserve pour une future navigation.
-A modifier si : une navigation explicite est demandee plus tard.
-A eviter si : aucune navigation complete n'est encore demandee.
+Utilite reelle : constantes de routes manuelles reservees aux vues isolees ou a une future navigation.
+A modifier si : une route nommee doit etre exposee sans changer la navigation principale.
+A eviter si : aucune route explicite n'est demandee.
 
 ### features/
 
@@ -33,6 +33,11 @@ A eviter si : aucune navigation complete n'est encore demandee.
 Utilite reelle : page Accueil du shell MVP avec intention produit et resume fictif.
 A modifier si : on change le contenu d'accueil ou les actions visibles.
 A eviter si : on veut changer la barre de navigation.
+
+`lun4rmood/lib/features/intro/splash_intro_view.dart`
+Utilite reelle : vue SplashIntroView isolee pour preparer l'introduction lunaire et phenix.
+A modifier si : une tache demande de faire evoluer l'intro, la lune, le bouton Entrer ou la future animation.
+A eviter si : on veut changer le demarrage actuel de l'application sans decision explicite.
 
 `lun4rmood/lib/features/check_in/check_in_page.dart`
 Utilite reelle : page principale de saisie quotidienne du Check-in.
@@ -152,6 +157,16 @@ Utilite reelle : palette de couleurs centrale de Lun4rMood.
 A modifier si : une decision demande de changer la palette globale.
 A eviter si : on veut seulement tester une couleur locale dans une page.
 
+`lun4rmood/lib/shared/theme/app_gradients.dart`
+Utilite reelle : gradients centraux PH3YNYX pour fonds, accents et composants.
+A modifier si : une decision demande de changer les gradients globaux.
+A eviter si : un gradient est strictement specifique a un prototype isole.
+
+`lun4rmood/lib/shared/theme/app_shadows.dart`
+Utilite reelle : ombres et glows centraux pour cartes, lune et accents.
+A modifier si : une decision demande de changer l'intensite globale des glows.
+A eviter si : une ombre locale est liee a une animation ou un etat specifique.
+
 `lun4rmood/lib/shared/theme/app_spacing.dart`
 Utilite reelle : constantes d'espacement communes.
 A modifier si : l'echelle d'espacement globale change.
@@ -205,9 +220,9 @@ Modify if: tabs, order, icons, or the page shown by a tab changes.
 Avoid if: you only want to edit the content of a page.
 
 `lun4rmood/lib/app/router.dart`
-Real purpose: reserved place for future navigation.
-Modify if: explicit navigation is requested later.
-Avoid if: no complete navigation is requested yet.
+Real purpose: manual route constants reserved for isolated views or future navigation.
+Modify if: a named route must be exposed without changing the main navigation.
+Avoid if: no explicit route is requested.
 
 ### features/
 
@@ -215,6 +230,11 @@ Avoid if: no complete navigation is requested yet.
 Real purpose: Home page for the MVP shell with product intent and fake summary.
 Modify if: home content or visible actions change.
 Avoid if: you want to change the navigation bar.
+
+`lun4rmood/lib/features/intro/splash_intro_view.dart`
+Real purpose: isolated SplashIntroView preparing the lunar and phoenix introduction.
+Modify if: a task asks to evolve the intro, moon, Enter button, or future animation.
+Avoid if: you want to change the current app startup without an explicit decision.
 
 `lun4rmood/lib/features/check_in/check_in_page.dart`
 Real purpose: main daily Check-in input page.
@@ -333,6 +353,16 @@ Avoid if: the widget clearly belongs to one feature only.
 Real purpose: central Lun4rMood color palette.
 Modify if: a decision asks to change the global palette.
 Avoid if: you only want to test a local color in one page.
+
+`lun4rmood/lib/shared/theme/app_gradients.dart`
+Real purpose: central PH3YNYX gradients for backgrounds, accents, and components.
+Modify if: a decision asks to change global gradients.
+Avoid if: a gradient is strictly specific to an isolated prototype.
+
+`lun4rmood/lib/shared/theme/app_shadows.dart`
+Real purpose: central shadows and glows for cards, moon, and accents.
+Modify if: a decision asks to change global glow intensity.
+Avoid if: a local shadow belongs to a specific animation or state.
 
 `lun4rmood/lib/shared/theme/app_spacing.dart`
 Real purpose: shared spacing constants.
