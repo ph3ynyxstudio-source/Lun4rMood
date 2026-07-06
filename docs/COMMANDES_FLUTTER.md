@@ -1,5 +1,61 @@
 # Commandes Flutter habituelles
 
+## Demarrage rapide Android
+
+Pour continuer le build de l'app sur un telephone Android branche en USB :
+
+1. Brancher le telephone
+2. Activer `USB debugging`
+3. Accepter la fenetre `Allow USB debugging?` sur le telephone si elle apparait
+4. Depuis la racine du depot Lun4rMood, lancer :
+
+```powershell
+cd lun4rmood
+flutter pub get
+flutter devices
+flutter run
+```
+
+Si plusieurs appareils sont detectes, lancer sur le bon appareil avec :
+
+```powershell
+flutter run -d REAL_DEVICE_ID
+```
+
+Pendant que `flutter run` reste ouvert :
+
+- appuyer sur `r` pour faire un hot reload ;
+- appuyer sur `R` pour faire un hot restart ;
+- appuyer sur `q` pour quitter.
+
+Si `flutter devices` n'affiche que `Windows` et `Edge`, aucun appareil Android n'est encore pret.
+Dans ce cas, brancher le telephone ou demarrer un emulateur Android.
+
+### Premiere connexion d'un telephone Android
+
+Sur le telephone :
+
+1. Activer `Developer options`
+2. Activer `USB debugging`
+3. Brancher le cable USB
+4. Choisir si besoin le mode USB `File transfer`
+5. Accepter la fenetre `Allow USB debugging?`
+
+Sur le PC :
+
+```powershell
+cd lun4rmood
+flutter devices
+flutter run
+```
+
+Si le telephone n'apparait pas :
+
+- debrancher et rebrancher le cable ;
+- reverifier que `USB debugging` est actif ;
+- accepter de nouveau la fenetre d'autorisation sur le telephone ;
+- relancer `flutter devices`.
+
 ## FR
 
 ### Se placer dans le projet Flutter
