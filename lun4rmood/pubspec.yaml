@@ -63,6 +63,7 @@ flutter:
     - assets/moons/
     - web/icons/Typo_marketing.png
     - assets/crystaph3y.glb
+    - assets/images/fond-nuage.webp
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

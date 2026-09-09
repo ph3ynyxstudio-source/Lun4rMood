@@ -10,9 +10,11 @@ import '../../shared/theme/app_text_styles.dart';
 class SplashIntroView extends StatelessWidget {
   const SplashIntroView({
     super.key,
+    required this.isReady,
     this.onEnter,
   });
 
+  final bool isReady;
   final VoidCallback? onEnter;
 
   @override
@@ -41,6 +43,7 @@ class SplashIntroView extends StatelessWidget {
                         _MoonStage(size: moonSize),
                         const SizedBox(height: AppSpacing.huge),
                         _EnterButton(
+                          isReady: isReady,
                           onPressed: onEnter ??
                               () {
                                 Navigator.of(context).maybePop();
@@ -154,14 +157,20 @@ class _PhoenixFutureLayer extends StatelessWidget {
 }
 
 class _EnterButton extends StatelessWidget {
-  const _EnterButton({required this.onPressed});
+  const _EnterButton({required this.onPressed, required this.isReady});
 
   final VoidCallback onPressed;
+  final bool isReady;
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
+    return AnimatedOpacity(
+      opacity: isReady ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 400),
+      child: IgnorePointer(
+        ignoring: !isReady,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
         gradient: AppGradients.cyanPink,
         borderRadius: BorderRadius.circular(AppRadius.pill),
         boxShadow: AppShadows.md,
@@ -180,6 +189,8 @@ class _EnterButton extends StatelessWidget {
               'Entrer',
               textAlign: TextAlign.center,
               style: AppTextStyles.button.copyWith(color: AppColors.buttonText),
+                ),
+              ),
             ),
           ),
         ),

@@ -10,7 +10,6 @@ import '../features/phoenix/phoenix_page.dart';
 import '../features/settings/settings_page.dart';
 import '../features/statistics/statistics_page.dart';
 import '../shared/theme/app_colors.dart';
-import '../shared/widgets/crystaph3y_overlay.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -52,12 +51,7 @@ class _AppShellState extends State<AppShell> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Stack(
-        children: [
-          IndexedStack(index: _selectedIndex, children: pages),
-          const CrystaPh3yOverlay(),
-        ],
-      ),
+      body: IndexedStack(index: _selectedIndex, children: pages),
       bottomNavigationBar: _MainNavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: _selectTab,

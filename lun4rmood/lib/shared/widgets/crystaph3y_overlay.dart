@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_3d_controller/flutter_3d_controller.dart';
 
 class CrystaPh3yOverlay extends StatefulWidget {
-  const CrystaPh3yOverlay({super.key});
+  const CrystaPh3yOverlay({super.key, this.onModelLoaded});
+
+  final VoidCallback? onModelLoaded;   // ← AJOUT 1 : nouvelle propriété
 
   @override
   State<CrystaPh3yOverlay> createState() => _CrystaPh3yOverlayState();
@@ -19,6 +21,7 @@ class _CrystaPh3yOverlayState extends State<CrystaPh3yOverlay> {
 
   void _onModelLoaded(String address) {
     _controller.playAnimation(animationName: 'ArmatureAction');
+    widget.onModelLoaded?.call();   // ← AJOUT 2 : déclenche le callback
   }
 
   @override
