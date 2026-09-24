@@ -12,7 +12,9 @@ import '../features/statistics/statistics_page.dart';
 import '../shared/theme/app_colors.dart';
 
 class AppShell extends StatefulWidget {
-  const AppShell({super.key});
+  const AppShell({super.key, this.onTabChanged});
+
+  final ValueChanged<int>? onTabChanged;
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -37,6 +39,7 @@ class _AppShellState extends State<AppShell> {
 
   void _selectTab(int index) {
     setState(() => _selectedIndex = index);
+    widget.onTabChanged?.call(index);
   }
 
   @override

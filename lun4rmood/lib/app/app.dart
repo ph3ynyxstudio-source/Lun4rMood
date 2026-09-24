@@ -29,6 +29,7 @@ class AppRoot extends StatefulWidget {
 class _AppRootState extends State<AppRoot> {
   bool _showIntro = true;
   bool _isModelLoaded = false;
+  int _currentScreenIndex = 0;
 
   void _onModelLoaded() {
     setState(() => _isModelLoaded = true);
@@ -38,6 +39,10 @@ class _AppRootState extends State<AppRoot> {
     setState(() => _showIntro = false);
   }
 
+  void _onTabChanged(int index) {
+    setState(() => _currentScreenIndex = index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -45,13 +50,16 @@ class _AppRootState extends State<AppRoot> {
         if (_showIntro)
           SplashIntroView(isReady: _isModelLoaded, onEnter: _onEnter)
         else
-          const AppShell(),
+          AppShell(onTabChanged: _onTabChanged),
 
         // CrystaPh3y existe une seule fois, tout le temps.
         // Invisible pendant l'intro, visible une fois entré dans l'app.
         Opacity(
           opacity: _showIntro ? 0.0 : 1.0,
-          child: CrystaPh3yOverlay(onModelLoaded: _onModelLoaded),
+          child: CrystaPh3yOverlay(
+            onModelLoaded: _onModelLoaded,
+            screenIndex: _currentScreenIndex,
+          ),
         ),
       ],
     );

@@ -24,6 +24,7 @@ class HomePage extends StatelessWidget {
     final dateLabel = _formatFrenchDate(date);
 
     return AppPage(
+      backgroundImage: 'assets/images/fond-nuage.webp',
       children: [
         const _MoonPhaseSection(moonAsset: _moonAsset),
         const SizedBox(height: AppSpacing.lg),

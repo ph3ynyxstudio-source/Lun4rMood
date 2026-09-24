@@ -8,16 +8,19 @@ class AppPage extends StatelessWidget {
   const AppPage({
     super.key,
     required this.children,
-    this.showLogo = true,
+    this.showLogo = false,
+    this.backgroundImage,
   });
 
   final List<Widget> children;
   final bool showLogo;
+  final String? backgroundImage;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: StarryBackground(
+        backgroundImage: backgroundImage,
         child: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(

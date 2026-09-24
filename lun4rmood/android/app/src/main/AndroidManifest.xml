@@ -1,4 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Requis par flutter_3d_controller : le modèle GLB est rendu via une
+         WebView interne au package, qui bloque le chargement de fichiers
+         locaux (assets) sans ce réglage sur Android 9+. Sans cette ligne,
+         CrystaPh3y ne charge jamais et le callback onModelLoaded ne se
+         déclenche jamais, bloquant l'écran d'intro. Testé et confirmé le
+         2026-09-10. -->
     <application
         android:label="lun4rmood"
         android:name="${applicationName}"

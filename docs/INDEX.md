@@ -17,6 +17,8 @@ Il doit etre consulte avant les changements importants sur la base Flutter.
 - [Navigation des composants](./NAVIGATION_COMPONENTS.md)
 - [Migration React vers Flutter](./MIGRATION_REACT_TO_FLUTTER.md)
 - [Decisions produit](./PRODUCT_DECISIONS.md)
+- [Guide visuel — CrystaPh3y Overlay](./guides_manuels/crystaph3y_overlay.md)
+- [Logique technique — CrystaPh3y Overlay](./logique_technique/crystaph3y_overlay.md)
 
 ### Etat actuel du projet
 
@@ -57,6 +59,8 @@ It should be checked before important changes to the Flutter base.
 - [Components Navigation](./NAVIGATION_COMPONENTS.md)
 - [React to Flutter Migration](./MIGRATION_REACT_TO_FLUTTER.md)
 - [Product Decisions](./PRODUCT_DECISIONS.md)
+- [Visual Guide — CrystaPh3y Overlay](./guides_manuels/crystaph3y_overlay.md)
+- [Technical Logic — CrystaPh3y Overlay](./logique_technique/crystaph3y_overlay.md)
 
 ### Current project state
 

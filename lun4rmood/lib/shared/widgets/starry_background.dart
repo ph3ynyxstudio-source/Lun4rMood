@@ -6,14 +6,24 @@ class StarryBackground extends StatelessWidget {
   const StarryBackground({
     super.key,
     required this.child,
+    this.backgroundImage,
   });
 
   final Widget child;
+  final String? backgroundImage;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: const BoxDecoration(gradient: AppGradients.background),
+      decoration: BoxDecoration(
+        gradient: backgroundImage == null ? AppGradients.background : null,
+        image: backgroundImage != null
+            ? DecorationImage(
+                image: AssetImage(backgroundImage!),
+                fit: BoxFit.cover,
+              )
+            : null,
+      ),
       child: CustomPaint(
         painter: const _StarryBackgroundPainter(),
         child: child,
